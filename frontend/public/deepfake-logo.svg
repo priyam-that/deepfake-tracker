@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <!-- Color Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4c1d95;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#ec4899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f97316;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff006e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#ec4899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffbe0b;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="faceLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e1b4b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#312e81;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="faceRight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+    </linearGradient>
+    
+    <radialGradient id="glow">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:0" />
+    </radialGradient>
+    
+    <clipPath id="leftHalf">
+      <rect x="0" y="0" width="100" height="200"/>
+    </clipPath>
+    
+    <clipPath id="rightHalf">
+      <rect x="100" y="0" width="100" height="200"/>
+    </clipPath>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="200" height="200" fill="url(#bgGrad)" opacity="0.2"/>
+  
+  <!-- Glow effect behind face -->
+  <ellipse cx="100" cy="100" rx="70" ry="90" fill="url(#glow)">
+    <animate attributeName="rx" values="65;75;65" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="ry" values="85;95;85" dur="3s" repeatCount="indefinite"/>
+  </ellipse>
+  
+  <!-- Human Head Silhouette Path -->
+  <path id="headShape" d="
+    M 100 30
+    C 120 30, 135 40, 140 55
+    C 143 65, 143 75, 142 85
+    C 141 95, 138 105, 135 112
+    L 132 125
+    C 130 135, 125 142, 120 148
+    L 115 155
+    C 112 160, 108 163, 105 165
+    L 100 168
+    L 95 165
+    C 92 163, 88 160, 85 155
+    L 80 148
+    C 75 142, 70 135, 68 125
+    L 65 112
+    C 62 105, 59 95, 58 85
+    C 57 75, 57 65, 60 55
+    C 65 40, 80 30, 100 30
+    Z
+  " fill="none"/>
+  
+  <!-- Left half of head (Dark) -->
+  <g clip-path="url(#leftHalf)">
+    <use href="#headShape" fill="url(#faceLeft)"/>
+  </g>
+  
+  <!-- Right half of head (Cyan/Purple) -->
+  <g clip-path="url(#rightHalf)">
+    <use href="#headShape" fill="url(#faceRight)"/>
+  </g>
+  
+  <!-- Glitched duplicate - slight offset for deepfake effect -->
+  <g opacity="0.4">
+    <g clip-path="url(#leftHalf)">
+      <use href="#headShape" fill="#ff006e" transform="translate(-3, 0)"/>
+    </g>
+    <g clip-path="url(#rightHalf)">
+      <use href="#headShape" fill="#06b6d4" transform="translate(3, 0)"/>
+    </g>
+  </g>
+  
+  <!-- Center split line with pulsing glow -->
+  <line x1="100" y1="30" x2="100" y2="168" stroke="#ff006e" stroke-width="2" opacity="0.9">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+  </line>
+  <line x1="100" y1="30" x2="100" y2="168" stroke="#06b6d4" stroke-width="2" opacity="0.5" transform="translate(1, 0)"/>
+  
+  <!-- Horizontal glitch lines on face -->
+  <rect x="65" y="60" width="30" height="2" fill="#ff006e" opacity="0.8">
+    <animate attributeName="x" values="65;70;65" dur="0.4s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="105" y="75" width="30" height="2" fill="#06b6d4" opacity="0.8">
+    <animate attributeName="x" values="105;100;105" dur="0.5s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="70" y="95" width="25" height="2" fill="#ff006e" opacity="0.6">
+    <animate attributeName="x" values="70;73;70" dur="0.3s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="110" y="110" width="25" height="2" fill="#06b6d4" opacity="0.6">
+    <animate attributeName="x" values="110;107;110" dur="0.35s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- "DEEP FAKE" Text overlaid on face -->
+  <text x="100" y="95" font-family="Arial, sans-serif" font-size="24" font-weight="900" 
+        fill="url(#textGrad)" text-anchor="middle" letter-spacing="1">
+    <tspan x="100" dy="0">DEEP</tspan>
+    <tspan x="100" dy="24">FAKE</tspan>
+  </text>
+  
+  <!-- Text glow effect -->
+  <text x="100" y="95" font-family="Arial, sans-serif" font-size="24" font-weight="900" 
+        fill="none" stroke="#fff" stroke-width="0.5" text-anchor="middle" letter-spacing="1" opacity="0.4">
+    <tspan x="100" dy="0">DEEP</tspan>
+    <tspan x="100" dy="24">FAKE</tspan>
+  </text>
+  
+  <!-- Scanning line effect -->
+  <rect x="50" y="50" width="100" height="1.5" fill="#ff006e" opacity="0.7">
+    <animate attributeName="y" values="30;168;30" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="4s" repeatCount="indefinite"/>
+  </rect>
+</svg>
