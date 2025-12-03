@@ -7,6 +7,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from analyzer import ContentAnalyzer
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -14,7 +15,27 @@ logger = logging.getLogger(__name__)
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend communication
+
+# Configure CORS - Allow requests from Vercel frontend
+allowed_origins = [
+    "http://localhost:5173",  # Local development
+    "http://localhost:3000",  # Alternative local port
+    "https://deepfake-tracker-nu.vercel.app",  # Your Vercel deployment
+    "https://deepfake-tracker-*.vercel.app",  # Vercel preview deployments
+]
+
+# Get additional allowed origins from environment variable if set
+env_origins = os.environ.get('ALLOWED_ORIGINS', '')
+if env_origins:
+    allowed_origins.extend(env_origins.split(','))
+
+CORS(app, resources={
+    r"/api/*": {
+        "origins": allowed_origins,
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
 
 # Initialize analyzer
 analyzer = ContentAnalyzer()
