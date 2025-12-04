@@ -16,12 +16,14 @@ logger = logging.getLogger(__name__)
 # Initialize Flask app
 app = Flask(__name__)
 
-# Configure CORS - Allow requests from Vercel frontend
+# Configure CORS - Allow requests from frontend
 allowed_origins = [
     "http://localhost:5173",  # Local development
     "http://localhost:3000",  # Alternative local port
-    "https://deepfake-tracker-nu.vercel.app",  # Your Vercel deployment
+    "https://deepfake-tracker-nu.vercel.app",  # Vercel deployment
     "https://deepfake-tracker-*.vercel.app",  # Vercel preview deployments
+    "https://deepfaketracker.netlify.app",  # Netlify deployment
+    "https://deploy-preview-*.netlify.app",  # Netlify preview deployments
 ]
 
 # Get additional allowed origins from environment variable if set
