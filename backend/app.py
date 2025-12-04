@@ -19,9 +19,7 @@ app = Flask(__name__)
 # Configure CORS - Allow requests from frontend
 allowed_origins = [
     "http://localhost:5173",  # Local development
-    "http://localhost:3000",  # Alternative local port
-    "https://deepfake-tracker-nu.vercel.app",  # Vercel deployment
-    "https://deepfake-tracker-*.vercel.app",  # Vercel preview deployments
+    "http://localhost:3000",  # Alternative local port 
     "https://deepfaketracker.netlify.app",  # Netlify deployment
     "https://deploy-preview-*.netlify.app",  # Netlify preview deployments
 ]
